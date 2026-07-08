@@ -1,0 +1,5 @@
+# Oversized media files that exceed GitHub's 100MB per-file limit.
+# These stay on local disk but are not tracked in git.
+mascot/mp4/letsgo.mov
+mascot/mp4/tothemoon.mov
+mascot/mp4/welcome.mov
