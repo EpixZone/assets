@@ -1,0 +1,187 @@
+/* Epix UI kit - components (prefix ek-). Requires epix-tokens.css.
+   No JS, no external assets, flat solid colors only.
+   Contrast rules baked in: soft semantic fills use --epix-ink-soft text, strong semantic fills use --epix-ink-strong text. .ek-menu and .ek-modal
+   are panels/overlays; apps toggle .is-open and position .ek-menu. */
+
+[class^="ek-"], [class*=" ek-"], [class^="ek-"]::before, [class*=" ek-"]::before, [class^="ek-"]::after, [class*=" ek-"]::after { box-sizing: border-box; }
+
+/* Shared focus ring */
+.ek-btn:focus-visible, .ek-input:focus-visible, .ek-select:focus-visible, .ek-textarea:focus-visible, .ek-checkbox:focus-visible, .ek-radio:focus-visible, .ek-tab:focus-visible, .ek-menu-item:focus-visible, .ek-switch input:focus-visible + .ek-switch-track { outline: var(--epix-focus-ring); outline-offset: var(--epix-focus-ring-offset); }
+
+/* Buttons */
+.ek-btn { display: inline-flex; align-items: center; justify-content: center; gap: var(--epix-space-2); height: 36px; padding: 0 var(--epix-space-4); border: var(--epix-border-width) solid var(--epix-border); border-radius: var(--epix-radius-md); background: var(--epix-surface); color: var(--epix-text); font-family: var(--epix-font-sans); font-size: var(--epix-text-body2-size); font-weight: 600; line-height: 1; text-decoration: none; white-space: nowrap; cursor: pointer; user-select: none; }
+.ek-btn:hover { background: var(--epix-surface-2); }
+.ek-btn:active { transform: translateY(1px); }
+.ek-btn:disabled, .ek-btn[aria-disabled="true"] { opacity: 0.55; cursor: not-allowed; transform: none; pointer-events: none; }
+.ek-btn-primary { background: var(--epix-accent); border-color: var(--epix-accent); color: var(--epix-on-accent); }
+.ek-btn-primary:hover { background: var(--epix-indigo); border-color: var(--epix-indigo); }
+.ek-btn-secondary { border-color: var(--epix-border-strong); }
+.ek-btn-secondary:hover { background: var(--epix-surface-2); }
+.ek-btn-ghost { background: transparent; border-color: transparent; }
+.ek-btn-ghost:hover { background: var(--epix-surface-2); }
+/* white on #F0224B is 4.17:1 and fails AA, so danger uses dark ink */
+.ek-btn-danger { background: var(--epix-danger); border-color: var(--epix-danger); color: var(--epix-ink-strong); }
+.ek-btn-danger:hover { box-shadow: inset 0 0 0 999px rgba(2, 2, 2, 0.08); }
+/* Sizes: 32 / 36 / 44 / 52 */
+.ek-btn-sm { height: 32px; padding: 0 var(--epix-space-3); font-size: var(--epix-text-body3-size); }
+.ek-btn-md { height: 36px; }
+.ek-btn-lg { height: 44px; padding: 0 var(--epix-space-5); font-size: var(--epix-text-body1-size); }
+.ek-btn-xl { height: 52px; padding: 0 var(--epix-space-6); font-size: var(--epix-text-body1-size); }
+
+/* Inputs */
+.ek-input, .ek-select, .ek-textarea { display: block; width: 100%; min-height: 36px; padding: var(--epix-space-2) var(--epix-space-3); border: var(--epix-border-width) solid var(--epix-border-strong); border-radius: var(--epix-radius-md); background: var(--epix-surface); color: var(--epix-text); font-family: var(--epix-font-sans); font-size: var(--epix-text-body2-size); line-height: var(--epix-text-body2-lh); }
+.ek-input::placeholder, .ek-textarea::placeholder { color: var(--epix-text-low); }
+.ek-input:focus, .ek-select:focus, .ek-textarea:focus { border-color: var(--epix-focus); }
+.ek-input:disabled, .ek-select:disabled, .ek-textarea:disabled { background: var(--epix-surface-2); color: var(--epix-text-low); cursor: not-allowed; }
+.ek-input[aria-invalid="true"], .ek-select[aria-invalid="true"], .ek-textarea[aria-invalid="true"], .ek-input.is-invalid, .ek-select.is-invalid, .ek-textarea.is-invalid { border-color: var(--epix-danger); border-width: var(--epix-border-width-2); }
+.ek-textarea { min-height: 96px; resize: vertical; }
+.ek-select { cursor: pointer; }
+.ek-input-mono { font-family: var(--epix-font-mono); font-size: var(--epix-text-body3-size); }
+
+/* Toggle switch (a real checkbox inside a label) */
+.ek-switch { display: inline-flex; align-items: center; gap: var(--epix-space-2); font-family: var(--epix-font-sans); font-size: var(--epix-text-body2-size); color: var(--epix-text); cursor: pointer; }
+.ek-switch input { position: absolute; width: 1px; height: 1px; margin: 0; opacity: 0; }
+.ek-switch-track { position: relative; flex: none; width: 40px; height: 22px; border-radius: 999px; background: var(--epix-text-low); transition: background-color 0.15s ease; }
+.ek-switch-track::before { content: ""; position: absolute; top: 2px; left: 2px; width: 18px; height: 18px; border-radius: 50%; background: var(--epix-neutral-0); box-shadow: var(--epix-shadow-sm); transition: transform 0.15s ease; }
+.ek-switch input:checked + .ek-switch-track { background: var(--epix-accent); }
+.ek-switch input:checked + .ek-switch-track::before { transform: translateX(18px); }
+.ek-switch input:disabled + .ek-switch-track { opacity: 0.55; }
+.ek-switch input:disabled ~ * { cursor: not-allowed; }
+
+/* Checkbox and radio */
+.ek-checkbox, .ek-radio { appearance: none; -webkit-appearance: none; flex: none; width: 18px; height: 18px; margin: 0; border: var(--epix-border-width-2) solid var(--epix-text-low); background: var(--epix-surface); cursor: pointer; }
+.ek-checkbox { border-radius: var(--epix-radius-sm); }
+.ek-radio { border-radius: 50%; }
+.ek-checkbox:checked { background: var(--epix-accent) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12'%3E%3Cpath d='M2.5 6.4l2.4 2.4 4.6-5' fill='none' stroke='%23FEFEFE' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center / 12px 12px no-repeat; border-color: var(--epix-accent); }
+.ek-radio:checked { border-width: 6px; border-color: var(--epix-accent); }
+.ek-checkbox:disabled, .ek-radio:disabled { opacity: 0.55; cursor: not-allowed; }
+.ek-check { display: inline-flex; align-items: center; gap: var(--epix-space-2); font-family: var(--epix-font-sans); font-size: var(--epix-text-body2-size); color: var(--epix-text); cursor: pointer; }
+
+/* Card */
+.ek-card { background: var(--epix-surface); color: var(--epix-text); border: var(--epix-border-width) solid var(--epix-border); border-radius: var(--epix-radius-lg); box-shadow: var(--epix-shadow-sm); padding: var(--epix-space-5); }
+.ek-card-title { margin: 0 0 var(--epix-space-2); font-size: var(--epix-text-h5-size); font-weight: var(--epix-text-h5-weight); line-height: var(--epix-text-h5-lh); }
+.ek-card-sub { margin: 0 0 var(--epix-space-3); font-size: var(--epix-text-body3-size); color: var(--epix-text-mid); }
+
+/* Table */
+.ek-table { width: 100%; border-collapse: collapse; color: var(--epix-text); font-family: var(--epix-font-sans); font-size: var(--epix-text-body2-size); }
+.ek-table th { padding: var(--epix-space-2) var(--epix-space-3); background: var(--epix-surface-2); color: var(--epix-text-mid); font-size: var(--epix-text-overline-size); font-weight: var(--epix-text-overline-weight); letter-spacing: var(--epix-text-overline-spacing); text-transform: uppercase; text-align: left; }
+.ek-table td { padding: var(--epix-space-3); border-top: var(--epix-border-width) solid var(--epix-border); }
+.ek-table tbody tr:hover { background: var(--epix-surface-2); }
+.ek-table .ek-num { text-align: right; font-family: var(--epix-font-mono); font-size: var(--epix-text-body3-size); }
+@media (max-width: 640px) {
+  .ek-table-collapse thead { display: none; }
+  .ek-table-collapse, .ek-table-collapse tbody, .ek-table-collapse tr, .ek-table-collapse td { display: block; width: 100%; }
+  .ek-table-collapse tr { margin-bottom: var(--epix-space-3); overflow: hidden; border: var(--epix-border-width) solid var(--epix-border); border-radius: var(--epix-radius-md); background: var(--epix-surface); }
+  .ek-table-collapse td { display: flex; align-items: baseline; justify-content: space-between; gap: var(--epix-space-4); border-top: 0; padding: var(--epix-space-3); }
+  .ek-table-collapse td + td { border-top: var(--epix-border-width) solid var(--epix-border); }
+  .ek-table-collapse td::before { content: attr(data-label); flex: none; font-weight: 600; color: var(--epix-text-mid); font-size: var(--epix-text-body3-size); }
+  .ek-table-collapse tbody tr:hover { background: var(--epix-surface); }
+}
+
+/* Modal and bottom sheet */
+.ek-modal { position: fixed; inset: 0; z-index: var(--epix-z-modal); display: none; align-items: center; justify-content: center; padding: var(--epix-space-4); background: rgba(2, 2, 2, 0.55); }
+.ek-modal.is-open, .ek-modal[open] { display: flex; }
+.ek-modal-dialog { width: 100%; max-width: 440px; max-height: 85vh; overflow: auto; padding: var(--epix-space-5); background: var(--epix-surface); color: var(--epix-text); border: var(--epix-border-width) solid var(--epix-border); border-radius: var(--epix-radius-lg); box-shadow: var(--epix-shadow); font-family: var(--epix-font-sans); font-size: var(--epix-text-body2-size); line-height: var(--epix-text-body2-lh); }
+.ek-modal-title { margin: 0 0 var(--epix-space-3); font-size: var(--epix-text-h4-size); font-weight: var(--epix-text-h4-weight); line-height: var(--epix-text-h4-lh); }
+.ek-modal-actions { display: flex; justify-content: flex-end; gap: var(--epix-space-3); margin-top: var(--epix-space-5); }
+@media (max-width: 640px) {
+  .ek-sheet { align-items: flex-end; padding: 0; }
+  .ek-sheet .ek-modal-dialog { max-width: none; border-left: 0; border-right: 0; border-bottom: 0; border-radius: var(--epix-radius-lg) var(--epix-radius-lg) 0 0; padding-bottom: var(--epix-space-8); }
+  .ek-modal-actions { flex-direction: column-reverse; }
+  .ek-modal-actions .ek-btn { width: 100%; }
+}
+
+/* Menu (dropdown panel; position it from the app) */
+.ek-menu { min-width: 180px; padding: var(--epix-space-1); background: var(--epix-surface); border: var(--epix-border-width) solid var(--epix-border); border-radius: var(--epix-radius-md); box-shadow: var(--epix-shadow); z-index: var(--epix-z-dropdown); font-family: var(--epix-font-sans); }
+.ek-menu-item { display: flex; align-items: center; gap: var(--epix-space-2); width: 100%; min-height: 36px; padding: var(--epix-space-2) var(--epix-space-3); border: 0; border-radius: var(--epix-radius-sm); background: transparent; color: var(--epix-text); font-size: var(--epix-text-body2-size); text-align: left; text-decoration: none; cursor: pointer; }
+.ek-menu-item:hover { background: var(--epix-surface-2); }
+.ek-menu-item.is-active { background: var(--epix-surface-2); font-weight: 600; }
+.ek-menu-item:disabled { color: var(--epix-text-low); cursor: not-allowed; background: transparent; }
+.ek-menu-sep { height: 1px; margin: var(--epix-space-1) var(--epix-space-2); background: var(--epix-border); }
+
+/* Tabs */
+.ek-tabs { display: flex; gap: var(--epix-space-1); border-bottom: var(--epix-border-width) solid var(--epix-border); font-family: var(--epix-font-sans); }
+.ek-tab { min-height: 40px; padding: var(--epix-space-2) var(--epix-space-3); border: 0; border-bottom: var(--epix-border-width-2) solid transparent; margin-bottom: calc(-1 * var(--epix-border-width)); background: transparent; color: var(--epix-text-mid); font-size: var(--epix-text-body2-size); font-weight: 600; cursor: pointer; }
+.ek-tab:hover { color: var(--epix-text); }
+.ek-tab.is-active, .ek-tab[aria-selected="true"] { color: var(--epix-text); border-bottom-color: var(--epix-accent); }
+
+/* Toast: soft fill + ink left accent; ink text keeps AA on the soft fill.
+   Success/warning/info left borders use --epix-ink-soft, not the strong hex:
+   those hexes only reach 1.7-2.1:1 on their soft tints. Danger (3.67:1) keeps its hex. */
+.ek-toast { display: flex; align-items: flex-start; gap: var(--epix-space-3); width: 100%; max-width: 360px; padding: var(--epix-space-3) var(--epix-space-4); background: var(--epix-surface); color: var(--epix-text); border: var(--epix-border-width) solid var(--epix-border); border-left: 4px solid var(--epix-accent); border-radius: var(--epix-radius-md); box-shadow: var(--epix-shadow); font-family: var(--epix-font-sans); font-size: var(--epix-text-body2-size); line-height: var(--epix-text-body2-lh); }
+.ek-toast-title { font-weight: 600; }
+.ek-toast-success { background: var(--epix-success-soft); border-left-color: var(--epix-ink-soft); color: var(--epix-ink-soft); }
+.ek-toast-warning { background: var(--epix-warning-soft); border-left-color: var(--epix-ink-soft); color: var(--epix-ink-soft); }
+.ek-toast-danger { background: var(--epix-danger-soft); border-left-color: var(--epix-danger); color: var(--epix-ink-soft); }
+.ek-toast-info { background: var(--epix-info-soft); border-left-color: var(--epix-ink-soft); color: var(--epix-ink-soft); }
+.ek-toast-stack { position: fixed; right: var(--epix-space-4); bottom: var(--epix-space-4); z-index: var(--epix-z-toast); display: flex; flex-direction: column; gap: var(--epix-space-2); }
+
+/* Progress bar. Default fill is --epix-focus, not --epix-accent: purple only
+   reaches 2.65:1 vs the dark track, focus is 3.74:1 light / 9.38:1 dark.
+   The success and warning fills fail 3:1 vs the light track, so those two
+   variants must always sit next to a visible numeric value (as the demo
+   cards do); the bar alone must not be the only conveyor of the amount. */
+.ek-progress { width: 100%; height: 8px; border-radius: 999px; background: var(--epix-border); overflow: hidden; }
+.ek-progress-bar { height: 100%; border-radius: inherit; background: var(--epix-focus); }
+.ek-progress-success .ek-progress-bar { background: var(--epix-success); }
+.ek-progress-warning .ek-progress-bar { background: var(--epix-warning); }
+.ek-progress-danger .ek-progress-bar { background: var(--epix-danger); }
+
+/* Ring. Usage: <svg class="ek-ring" viewBox="0 0 48 48">
+   <circle class="ek-ring-track" cx="24" cy="24" r="20"/>
+   <circle class="ek-ring-value" cx="24" cy="24" r="20"
+     stroke-dasharray="125.66" stroke-dashoffset="35.2"/></svg>
+   dashoffset = 125.66 * (1 - value) */
+.ek-ring { width: 48px; height: 48px; transform: rotate(-90deg); }
+.ek-ring circle { fill: none; stroke-width: 4; stroke-linecap: round; }
+.ek-ring-track { stroke: var(--epix-border); }
+.ek-ring-value { stroke: var(--epix-focus); }
+
+/* Badge (strong fill + ink) and tag (soft or neutral fill + ink) */
+.ek-badge, .ek-tag { display: inline-flex; align-items: center; gap: var(--epix-space-1); background: var(--epix-surface-2); color: var(--epix-text-mid); border-radius: 999px; font-family: var(--epix-font-sans); font-size: var(--epix-text-caption-size); font-weight: 600; line-height: 1; white-space: nowrap; }
+.ek-badge { height: 20px; padding: 0 var(--epix-space-2); }
+.ek-badge-success { background: var(--epix-success); color: var(--epix-ink-strong); }
+.ek-badge-warning { background: var(--epix-warning); color: var(--epix-ink-strong); }
+.ek-badge-danger { background: var(--epix-danger); color: var(--epix-ink-strong); }
+.ek-badge-info { background: var(--epix-info); color: var(--epix-ink-strong); }
+.ek-badge-accent { background: var(--epix-accent); color: var(--epix-on-accent); }
+.ek-tag { height: 24px; padding: 0 var(--epix-space-3); font-weight: 500; border: var(--epix-border-width) solid var(--epix-border); }
+/* Success/warning/info tag borders stay neutral: the strong hexes fail 3:1 on the soft tints. */
+.ek-tag-success { background: var(--epix-success-soft); border-color: var(--epix-border-strong); color: var(--epix-ink-soft); }
+.ek-tag-warning { background: var(--epix-warning-soft); border-color: var(--epix-border-strong); color: var(--epix-ink-soft); }
+.ek-tag-danger { background: var(--epix-danger-soft); border-color: var(--epix-danger); color: var(--epix-ink-soft); }
+.ek-tag-info { background: var(--epix-info-soft); border-color: var(--epix-border-strong); color: var(--epix-ink-soft); }
+
+/* Definition list */
+.ek-dl { display: grid; grid-template-columns: minmax(120px, max-content) 1fr; gap: var(--epix-space-2) var(--epix-space-6); margin: 0; color: var(--epix-text); font-family: var(--epix-font-sans); font-size: var(--epix-text-body2-size); }
+.ek-dl dt { color: var(--epix-text-mid); font-weight: 500; }
+.ek-dl dd { margin: 0; min-width: 0; overflow-wrap: anywhere; }
+.ek-dl .ek-mono, .ek-mono { font-family: var(--epix-font-mono); font-size: var(--epix-text-body3-size); }
+@media (max-width: 640px) {
+  .ek-dl { grid-template-columns: 1fr; gap: var(--epix-space-1); }
+  .ek-dl dd { margin-bottom: var(--epix-space-2); }
+}
+
+/* Field: label above control */
+.ek-field { display: flex; flex-direction: column; gap: var(--epix-space-1); min-width: 0; font-family: var(--epix-font-sans); }
+.ek-field-label { font-size: var(--epix-text-h5-size); font-weight: var(--epix-text-h5-weight); line-height: var(--epix-text-h5-lh); color: var(--epix-text); }
+.ek-field-hint { font-size: var(--epix-text-caption-size); line-height: var(--epix-text-caption-lh); color: var(--epix-text-low); }
+/* danger red as small text fails AA; the dot and input border carry the color */
+.ek-field-error { display: flex; align-items: center; gap: var(--epix-space-1); font-size: var(--epix-text-caption-size); line-height: var(--epix-text-caption-lh); font-weight: 600; color: var(--epix-text); }
+.ek-field-error::before { content: ""; flex: none; width: 8px; height: 8px; border-radius: 50%; background: var(--epix-danger); }
+
+/* Layout helpers */
+.ek-row { display: flex; flex-wrap: wrap; align-items: center; gap: var(--epix-space-3); }
+.ek-grid { display: grid; gap: var(--epix-space-4); grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); }
+
+/* Touch targets at mobile widths */
+@media (max-width: 640px) {
+  .ek-btn, .ek-btn-sm, .ek-btn-md { min-height: 44px; }
+  .ek-btn-lg, .ek-btn-xl { min-height: 52px; }
+  .ek-input, .ek-select { min-height: 44px; font-size: var(--epix-text-body1-size); }
+  .ek-textarea { font-size: var(--epix-text-body1-size); }
+  .ek-menu-item, .ek-tab, .ek-switch, .ek-check { min-height: 44px; }
+  .ek-checkbox, .ek-radio { width: 22px; height: 22px; }
+  .ek-radio:checked { border-width: 7px; }
+  .ek-field { width: 100%; }
+}

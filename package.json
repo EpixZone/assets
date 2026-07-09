@@ -1,0 +1,10 @@
+{
+  "name": "epix-assets",
+  "private": true,
+  "description": "Brand asset pipeline. Run: node scripts/generate-icons.mjs",
+  "dependencies": {
+    "opentype.js": "^2.0.0",
+    "png-to-ico": "^2.1.8",
+    "sharp": "^0.33.5"
+  }
+}
