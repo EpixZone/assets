@@ -1,0 +1,571 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Epix UI kit demo</title>
+<link rel="stylesheet" href="epix-tokens.css">
+<link rel="stylesheet" href="epix-kit.css">
+<style>
+/* Demo-only styles. Everything component-shaped comes from epix-kit.css. */
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  background: var(--epix-bg);
+  color: var(--epix-text);
+  font-family: var(--epix-font-sans);
+  font-size: var(--epix-text-body1-size);
+  line-height: var(--epix-text-body1-lh);
+}
+.demo-header {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: var(--epix-space-10) var(--epix-space-5) var(--epix-space-6);
+  display: flex;
+  align-items: center;
+  gap: var(--epix-space-4);
+}
+.demo-mark { width: 48px; height: 48px; flex: none; }
+.demo-header h1 {
+  margin: 0;
+  font-size: var(--epix-text-h1-size);
+  font-weight: var(--epix-text-h1-weight);
+  line-height: var(--epix-text-h1-lh);
+}
+.demo-sub {
+  margin: var(--epix-space-1) 0 0;
+  color: var(--epix-text-mid);
+  font-size: var(--epix-text-body2-size);
+}
+.demo-theme {
+  background: var(--epix-bg);
+  color: var(--epix-text);
+  padding: var(--epix-space-8) var(--epix-space-5) var(--epix-space-12);
+  border-top: var(--epix-border-width) solid var(--epix-border);
+}
+.demo-wrap {
+  max-width: 960px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: var(--epix-space-10);
+}
+.demo-theme h2 {
+  margin: 0;
+  font-size: var(--epix-text-h2-size);
+  font-weight: var(--epix-text-h2-weight);
+  line-height: var(--epix-text-h2-lh);
+}
+.demo-block { display: flex; flex-direction: column; gap: var(--epix-space-3); }
+.demo-block h3 {
+  margin: 0;
+  font-size: var(--epix-text-h4-size);
+  font-weight: var(--epix-text-h4-weight);
+  line-height: var(--epix-text-h4-lh);
+}
+.demo-note {
+  margin: var(--epix-space-1) 0 0;
+  font-size: var(--epix-text-body3-size);
+  color: var(--epix-text-mid);
+}
+.demo-opt { color: var(--epix-text-low); font-weight: 400; }
+.demo-form { display: flex; flex-direction: column; gap: var(--epix-space-4); max-width: 560px; }
+.demo-form-row { display: grid; grid-template-columns: 3fr 2fr; gap: var(--epix-space-4); }
+.demo-fieldset { border: 0; margin: 0; padding: 0; display: flex; flex-direction: column; gap: var(--epix-space-2); }
+.demo-fieldset legend { padding: 0; margin-bottom: var(--epix-space-2); }
+.demo-form-actions { justify-content: flex-end; }
+@media (max-width: 640px) {
+  .demo-form-row { grid-template-columns: 1fr; }
+  .demo-form-actions { flex-direction: column-reverse; align-items: stretch; }
+}
+@media (min-width: 641px) {
+  .demo-table-frame {
+    background: var(--epix-surface);
+    border: var(--epix-border-width) solid var(--epix-border);
+    border-radius: var(--epix-radius-lg);
+    overflow: hidden;
+  }
+}
+.demo-menu-frame { max-width: 220px; }
+.demo-pair { display: flex; flex-wrap: wrap; gap: var(--epix-space-6); align-items: flex-start; }
+.demo-pair > .ek-modal { flex: 1 1 320px; max-width: 460px; }
+.demo-static .ek-modal { display: flex; position: static; padding: 0; background: transparent; z-index: auto; }
+.demo-static .ek-toast-stack { position: static; z-index: auto; }
+.ek-modal-dialog p { margin: 0; }
+.demo-ring-row { display: flex; align-items: center; gap: var(--epix-space-3); }
+.demo-ring-label { margin: 0; }
+</style>
+</head>
+<body>
+
+<header class="demo-header">
+  <svg class="demo-mark" viewBox="0 0 72 72" xmlns="http://www.w3.org/2000/svg" fill="none" role="img" aria-label="Epix mark"><path d="M54.7402 54.7937L68.7215 40.8112C73.4302 36.1037 70.184 32.1425 68.8152 30.7737L54.7402 16.6987V54.7937Z" fill="#8A4BDB"/><path d="M16.4302 16.6927L30.4114 2.71144C35.1202 -1.99106 39.0864 1.25394 40.4552 2.61769L54.5302 16.6927H16.4302Z" fill="#5954CD"/><path d="M16.5562 54.8149L30.5387 68.7974C35.2462 73.4999 39.2124 70.2549 40.5762 68.8899L54.6512 54.8149H16.5562Z" fill="#69E9F5"/><path d="M16.5236 16.709L2.56858 30.7127C-2.16142 35.399 1.08358 39.359 2.44858 40.729L16.5236 54.804V16.709Z" fill="#31BDC6"/></svg>
+  <div>
+    <h1>Epix UI kit</h1>
+    <p class="demo-sub">epix-tokens.css + epix-kit.css. This header follows your system color scheme; the two sections below are pinned light and dark.</p>
+  </div>
+</header>
+
+  <section class="demo-theme theme-light" aria-label="Light theme">
+    <div class="demo-wrap">
+      <header>
+        <h2>Light theme</h2>
+        <p class="demo-note">Pinned with class="theme-light" on the section wrapper. No JS involved.</p>
+      </header>
+
+      <div class="demo-block">
+        <h3>Buttons</h3>
+        <div class="ek-row">
+          <button class="ek-btn" type="button">Default</button>
+          <button class="ek-btn ek-btn-primary" type="button">Primary</button>
+          <button class="ek-btn ek-btn-secondary" type="button">Secondary</button>
+          <button class="ek-btn ek-btn-ghost" type="button">Ghost</button>
+          <button class="ek-btn ek-btn-danger" type="button">Danger</button>
+          <button class="ek-btn ek-btn-primary" type="button" disabled>Disabled</button>
+          <button class="ek-btn ek-btn-secondary" type="button" disabled>Disabled</button>
+        </div>
+        <div class="ek-row">
+          <button class="ek-btn ek-btn-primary ek-btn-sm" type="button">Small 32</button>
+          <button class="ek-btn ek-btn-primary ek-btn-md" type="button">Medium 36</button>
+          <button class="ek-btn ek-btn-primary ek-btn-lg" type="button">Large 44</button>
+          <button class="ek-btn ek-btn-primary ek-btn-xl" type="button">XL 52</button>
+        </div>
+        <p class="demo-note">Rows above use the .ek-row helper. All heights bump to 44px minimum under 640px.</p>
+      </div>
+
+      <div class="demo-block">
+        <h3>Form (fields, inputs, select, textarea, radio, checkbox, switch)</h3>
+        <form class="ek-card demo-form">
+          <div class="ek-field">
+            <label class="ek-field-label" for="lt-to">Recipient address</label>
+            <input class="ek-input ek-input-mono" id="lt-to" name="lt-to" spellcheck="false" value="epix1qxy2kgdygjrsqtzq2n0yrf2493p83kkfjhx0wlh">
+            <span class="ek-field-hint">Paste a bech32 Epix address.</span>
+          </div>
+          <div class="demo-form-row">
+            <div class="ek-field">
+              <label class="ek-field-label" for="lt-amount">Amount</label>
+              <input class="ek-input" id="lt-amount" name="lt-amount" inputmode="decimal" value="12,x5" aria-invalid="true" aria-describedby="lt-amount-err">
+              <span class="ek-field-error" id="lt-amount-err">Enter a numeric amount.</span>
+            </div>
+            <div class="ek-field">
+              <label class="ek-field-label" for="lt-asset">Asset</label>
+              <select class="ek-select" id="lt-asset" name="lt-asset">
+                <option>EPIX</option>
+                <option>USDC</option>
+                <option>ATOM</option>
+              </select>
+            </div>
+          </div>
+          <div class="ek-field">
+            <label class="ek-field-label" for="lt-memo">Memo <span class="demo-opt">(optional)</span></label>
+            <textarea class="ek-textarea" id="lt-memo" name="lt-memo" placeholder="Shows on chain. Do not include secrets."></textarea>
+          </div>
+          <fieldset class="demo-fieldset">
+            <legend class="ek-field-label">Fee</legend>
+            <div class="ek-row">
+              <label class="ek-check"><input class="ek-radio" type="radio" name="lt-fee" value="slow"> Slow</label>
+              <label class="ek-check"><input class="ek-radio" type="radio" name="lt-fee" value="normal" checked> Normal</label>
+              <label class="ek-check"><input class="ek-radio" type="radio" name="lt-fee" value="fast"> Fast</label>
+            </div>
+          </fieldset>
+          <div class="ek-row">
+            <label class="ek-switch"><input type="checkbox" name="lt-save" checked><span class="ek-switch-track"></span> Save to contacts</label>
+            <label class="ek-check"><input class="ek-checkbox" type="checkbox" name="lt-confirm"> I checked the address twice</label>
+          </div>
+          <div class="ek-row demo-form-actions">
+            <button class="ek-btn ek-btn-ghost" type="button">Cancel</button>
+            <button class="ek-btn ek-btn-primary" type="submit">Review transaction</button>
+          </div>
+        </form>
+      </div>
+
+      <div class="demo-block">
+        <h3>Toggle, checkbox, radio states</h3>
+        <div class="ek-row">
+          <label class="ek-switch"><input type="checkbox"><span class="ek-switch-track"></span> Off</label>
+          <label class="ek-switch"><input type="checkbox" checked><span class="ek-switch-track"></span> On</label>
+          <label class="ek-switch"><input type="checkbox" disabled><span class="ek-switch-track"></span> Disabled</label>
+        </div>
+        <div class="ek-row">
+          <label class="ek-check"><input class="ek-checkbox" type="checkbox" checked> Checked</label>
+          <label class="ek-check"><input class="ek-checkbox" type="checkbox"> Unchecked</label>
+          <label class="ek-check"><input class="ek-checkbox" type="checkbox" checked disabled> Disabled</label>
+          <label class="ek-check"><input class="ek-radio" type="radio" name="lt-r2" checked> Picked</label>
+          <label class="ek-check"><input class="ek-radio" type="radio" name="lt-r2"> Not picked</label>
+        </div>
+      </div>
+
+      <div class="demo-block">
+        <h3>Stats table (collapses to cards under 640px)</h3>
+        <div class="demo-table-frame">
+          <table class="ek-table ek-table-collapse">
+            <thead>
+              <tr><th scope="col">Peer</th><th scope="col">Status</th><th scope="col">Height</th><th scope="col">Latency</th><th scope="col">Sent</th></tr>
+            </thead>
+            <tbody>
+              <tr><td data-label="Peer">node-eu-1.epix.zone</td><td data-label="Status"><span class="ek-badge ek-badge-success">Online</span></td><td data-label="Height" class="ek-num">4,821,905</td><td data-label="Latency" class="ek-num">38 ms</td><td data-label="Sent" class="ek-num">1.2 GB</td></tr>
+              <tr><td data-label="Peer">node-us-4.epix.zone</td><td data-label="Status"><span class="ek-badge ek-badge-warning">Syncing</span></td><td data-label="Height" class="ek-num">4,821,341</td><td data-label="Latency" class="ek-num">104 ms</td><td data-label="Sent" class="ek-num">804 MB</td></tr>
+              <tr><td data-label="Peer">node-ap-2.epix.zone</td><td data-label="Status"><span class="ek-badge ek-badge-danger">Offline</span></td><td data-label="Height" class="ek-num">4,818,220</td><td data-label="Latency" class="ek-num">n/a</td><td data-label="Sent" class="ek-num">62 MB</td></tr>
+              <tr><td data-label="Peer">node-eu-7.epix.zone</td><td data-label="Status"><span class="ek-badge ek-badge-info">Peering</span></td><td data-label="Height" class="ek-num">4,821,905</td><td data-label="Latency" class="ek-num">51 ms</td><td data-label="Sent" class="ek-num">2.9 GB</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="demo-note">Each td carries a data-label attribute; under 640px the label renders from td::before.</p>
+      </div>
+
+      <div class="demo-block">
+        <h3>Cards, grid, progress, ring</h3>
+        <div class="ek-grid">
+          <div class="ek-card">
+            <h4 class="ek-card-title">Chain sync</h4>
+            <p class="ek-card-sub">Block 4,821,905 of 4,822,610</p>
+            <div class="ek-progress" role="progressbar" aria-label="Chain sync" aria-valuenow="72" aria-valuemin="0" aria-valuemax="100"><div class="ek-progress-bar" style="width:72%"></div></div>
+          </div>
+          <div class="ek-card">
+            <h4 class="ek-card-title">Storage</h4>
+            <p class="ek-card-sub">38.1 GB of 64 GB used</p>
+            <div class="ek-progress ek-progress-warning" role="progressbar" aria-label="Storage" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"><div class="ek-progress-bar" style="width:60%"></div></div>
+          </div>
+          <div class="ek-card">
+            <h4 class="ek-card-title">Peer quota</h4>
+            <div class="demo-ring-row">
+              <svg class="ek-ring" viewBox="0 0 48 48" role="img" aria-label="72 percent of peer quota used">
+                <circle class="ek-ring-track" cx="24" cy="24" r="20"/>
+                <circle class="ek-ring-value" cx="24" cy="24" r="20" stroke-dasharray="125.66" stroke-dashoffset="35.2"/>
+              </svg>
+              <p class="ek-card-sub demo-ring-label">72% of 50 peer slots in use</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="demo-block">
+        <h3>Tabs</h3>
+        <div class="ek-tabs" role="tablist" aria-label="Node views">
+          <button class="ek-tab is-active" type="button" role="tab" aria-selected="true">Overview</button>
+          <button class="ek-tab" type="button" role="tab" aria-selected="false">Transactions</button>
+          <button class="ek-tab" type="button" role="tab" aria-selected="false">Peers</button>
+          <button class="ek-tab" type="button" role="tab" aria-selected="false">Settings</button>
+        </div>
+      </div>
+
+      <div class="demo-block">
+        <h3>Menu (dropdown panel, shown inline)</h3>
+        <div class="demo-menu-frame">
+          <div class="ek-menu" role="menu" aria-label="Address actions">
+            <button class="ek-menu-item is-active" type="button" role="menuitem">Copy address</button>
+            <button class="ek-menu-item" type="button" role="menuitem">View on explorer</button>
+            <button class="ek-menu-item" type="button" role="menuitem" disabled>Export key</button>
+            <div class="ek-menu-sep" role="separator"></div>
+            <button class="ek-menu-item" type="button" role="menuitem">Disconnect</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="demo-block">
+        <h3>Modal and bottom sheet (shown inline; apps toggle .is-open)</h3>
+        <div class="demo-static demo-pair">
+          <div class="ek-modal" role="dialog" aria-modal="true" aria-labelledby="lt-m1">
+            <div class="ek-modal-dialog">
+              <h4 class="ek-modal-title" id="lt-m1">Remove peer?</h4>
+              <p>node-ap-2.epix.zone will be dropped from your peer list. You can add it back later.</p>
+              <div class="ek-modal-actions">
+                <button class="ek-btn ek-btn-ghost" type="button">Cancel</button>
+                <button class="ek-btn ek-btn-danger" type="button">Remove peer</button>
+              </div>
+            </div>
+          </div>
+          <div class="ek-modal ek-sheet" role="dialog" aria-modal="true" aria-labelledby="lt-m2">
+            <div class="ek-modal-dialog">
+              <h4 class="ek-modal-title" id="lt-m2">Sign transaction</h4>
+              <p>Send 12.5 EPIX to epix1qxy&hellip;x0wlh for a 0.0021 EPIX fee.</p>
+              <div class="ek-modal-actions">
+                <button class="ek-btn ek-btn-ghost" type="button">Reject</button>
+                <button class="ek-btn ek-btn-primary" type="button">Sign</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <p class="demo-note">The second dialog has the .ek-sheet class: under 640px it docks to the bottom edge with stacked full-width actions.</p>
+      </div>
+
+      <div class="demo-block">
+        <h3>Toast stack (shown inline; normally fixed bottom-right)</h3>
+        <div class="demo-static">
+          <div class="ek-toast-stack">
+            <div class="ek-toast" role="status"><div><div class="ek-toast-title">Update available</div>EpixNet 0.9.4 is ready to install.</div></div>
+            <div class="ek-toast ek-toast-success" role="status"><div><div class="ek-toast-title">Transaction confirmed</div>Included in block 4,821,906.</div></div>
+            <div class="ek-toast ek-toast-warning" role="status"><div><div class="ek-toast-title">Fee market busy</div>Normal fee raised to 0.004 EPIX.</div></div>
+            <div class="ek-toast ek-toast-danger" role="alert"><div><div class="ek-toast-title">Broadcast failed</div>Node rejected the transaction. Check the sequence number.</div></div>
+            <div class="ek-toast ek-toast-info" role="status"><div><div class="ek-toast-title">New block</div>Height 4,821,907 sealed by val-epix-01.</div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="demo-block">
+        <h3>Badges and tags</h3>
+        <div class="ek-row">
+          <span class="ek-badge">Neutral</span>
+          <span class="ek-badge ek-badge-success">Success</span>
+          <span class="ek-badge ek-badge-warning">Warning</span>
+          <span class="ek-badge ek-badge-danger">Danger</span>
+          <span class="ek-badge ek-badge-info">Info</span>
+          <span class="ek-badge ek-badge-accent">Accent</span>
+        </div>
+        <div class="ek-row">
+          <span class="ek-tag">v0.9.4</span>
+          <span class="ek-tag ek-tag-success">Confirmed</span>
+          <span class="ek-tag ek-tag-warning">Pending</span>
+          <span class="ek-tag ek-tag-danger">Failed</span>
+          <span class="ek-tag ek-tag-info">Testnet</span>
+        </div>
+      </div>
+
+      <div class="demo-block">
+        <h3>Definition list</h3>
+        <div class="ek-card">
+          <dl class="ek-dl">
+            <dt>Tx hash</dt><dd class="ek-mono">9F2C41B0A64E7D13C58821F6B0AA43F09D7E55C2E8A1904B6C3F72D5D8E1</dd>
+            <dt>Block</dt><dd>4,821,906</dd>
+            <dt>Fee</dt><dd>0.0021 EPIX</dd>
+            <dt>Confirmations</dt><dd>18</dd>
+            <dt>Status</dt><dd><span class="ek-tag ek-tag-success">Confirmed</span></dd>
+          </dl>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <section class="demo-theme theme-dark" aria-label="Dark theme">
+    <div class="demo-wrap">
+      <header>
+        <h2>Dark theme</h2>
+        <p class="demo-note">Pinned with class="theme-dark" on the section wrapper. The same markup as the light section.</p>
+      </header>
+
+      <div class="demo-block">
+        <h3>Buttons</h3>
+        <div class="ek-row">
+          <button class="ek-btn" type="button">Default</button>
+          <button class="ek-btn ek-btn-primary" type="button">Primary</button>
+          <button class="ek-btn ek-btn-secondary" type="button">Secondary</button>
+          <button class="ek-btn ek-btn-ghost" type="button">Ghost</button>
+          <button class="ek-btn ek-btn-danger" type="button">Danger</button>
+          <button class="ek-btn ek-btn-primary" type="button" disabled>Disabled</button>
+          <button class="ek-btn ek-btn-secondary" type="button" disabled>Disabled</button>
+        </div>
+        <div class="ek-row">
+          <button class="ek-btn ek-btn-primary ek-btn-sm" type="button">Small 32</button>
+          <button class="ek-btn ek-btn-primary ek-btn-md" type="button">Medium 36</button>
+          <button class="ek-btn ek-btn-primary ek-btn-lg" type="button">Large 44</button>
+          <button class="ek-btn ek-btn-primary ek-btn-xl" type="button">XL 52</button>
+        </div>
+        <p class="demo-note">Rows above use the .ek-row helper. All heights bump to 44px minimum under 640px.</p>
+      </div>
+
+      <div class="demo-block">
+        <h3>Form (fields, inputs, select, textarea, radio, checkbox, switch)</h3>
+        <form class="ek-card demo-form">
+          <div class="ek-field">
+            <label class="ek-field-label" for="dk-to">Recipient address</label>
+            <input class="ek-input ek-input-mono" id="dk-to" name="dk-to" spellcheck="false" value="epix1qxy2kgdygjrsqtzq2n0yrf2493p83kkfjhx0wlh">
+            <span class="ek-field-hint">Paste a bech32 Epix address.</span>
+          </div>
+          <div class="demo-form-row">
+            <div class="ek-field">
+              <label class="ek-field-label" for="dk-amount">Amount</label>
+              <input class="ek-input" id="dk-amount" name="dk-amount" inputmode="decimal" value="12,x5" aria-invalid="true" aria-describedby="dk-amount-err">
+              <span class="ek-field-error" id="dk-amount-err">Enter a numeric amount.</span>
+            </div>
+            <div class="ek-field">
+              <label class="ek-field-label" for="dk-asset">Asset</label>
+              <select class="ek-select" id="dk-asset" name="dk-asset">
+                <option>EPIX</option>
+                <option>USDC</option>
+                <option>ATOM</option>
+              </select>
+            </div>
+          </div>
+          <div class="ek-field">
+            <label class="ek-field-label" for="dk-memo">Memo <span class="demo-opt">(optional)</span></label>
+            <textarea class="ek-textarea" id="dk-memo" name="dk-memo" placeholder="Shows on chain. Do not include secrets."></textarea>
+          </div>
+          <fieldset class="demo-fieldset">
+            <legend class="ek-field-label">Fee</legend>
+            <div class="ek-row">
+              <label class="ek-check"><input class="ek-radio" type="radio" name="dk-fee" value="slow"> Slow</label>
+              <label class="ek-check"><input class="ek-radio" type="radio" name="dk-fee" value="normal" checked> Normal</label>
+              <label class="ek-check"><input class="ek-radio" type="radio" name="dk-fee" value="fast"> Fast</label>
+            </div>
+          </fieldset>
+          <div class="ek-row">
+            <label class="ek-switch"><input type="checkbox" name="dk-save" checked><span class="ek-switch-track"></span> Save to contacts</label>
+            <label class="ek-check"><input class="ek-checkbox" type="checkbox" name="dk-confirm"> I checked the address twice</label>
+          </div>
+          <div class="ek-row demo-form-actions">
+            <button class="ek-btn ek-btn-ghost" type="button">Cancel</button>
+            <button class="ek-btn ek-btn-primary" type="submit">Review transaction</button>
+          </div>
+        </form>
+      </div>
+
+      <div class="demo-block">
+        <h3>Toggle, checkbox, radio states</h3>
+        <div class="ek-row">
+          <label class="ek-switch"><input type="checkbox"><span class="ek-switch-track"></span> Off</label>
+          <label class="ek-switch"><input type="checkbox" checked><span class="ek-switch-track"></span> On</label>
+          <label class="ek-switch"><input type="checkbox" disabled><span class="ek-switch-track"></span> Disabled</label>
+        </div>
+        <div class="ek-row">
+          <label class="ek-check"><input class="ek-checkbox" type="checkbox" checked> Checked</label>
+          <label class="ek-check"><input class="ek-checkbox" type="checkbox"> Unchecked</label>
+          <label class="ek-check"><input class="ek-checkbox" type="checkbox" checked disabled> Disabled</label>
+          <label class="ek-check"><input class="ek-radio" type="radio" name="dk-r2" checked> Picked</label>
+          <label class="ek-check"><input class="ek-radio" type="radio" name="dk-r2"> Not picked</label>
+        </div>
+      </div>
+
+      <div class="demo-block">
+        <h3>Stats table (collapses to cards under 640px)</h3>
+        <div class="demo-table-frame">
+          <table class="ek-table ek-table-collapse">
+            <thead>
+              <tr><th scope="col">Peer</th><th scope="col">Status</th><th scope="col">Height</th><th scope="col">Latency</th><th scope="col">Sent</th></tr>
+            </thead>
+            <tbody>
+              <tr><td data-label="Peer">node-eu-1.epix.zone</td><td data-label="Status"><span class="ek-badge ek-badge-success">Online</span></td><td data-label="Height" class="ek-num">4,821,905</td><td data-label="Latency" class="ek-num">38 ms</td><td data-label="Sent" class="ek-num">1.2 GB</td></tr>
+              <tr><td data-label="Peer">node-us-4.epix.zone</td><td data-label="Status"><span class="ek-badge ek-badge-warning">Syncing</span></td><td data-label="Height" class="ek-num">4,821,341</td><td data-label="Latency" class="ek-num">104 ms</td><td data-label="Sent" class="ek-num">804 MB</td></tr>
+              <tr><td data-label="Peer">node-ap-2.epix.zone</td><td data-label="Status"><span class="ek-badge ek-badge-danger">Offline</span></td><td data-label="Height" class="ek-num">4,818,220</td><td data-label="Latency" class="ek-num">n/a</td><td data-label="Sent" class="ek-num">62 MB</td></tr>
+              <tr><td data-label="Peer">node-eu-7.epix.zone</td><td data-label="Status"><span class="ek-badge ek-badge-info">Peering</span></td><td data-label="Height" class="ek-num">4,821,905</td><td data-label="Latency" class="ek-num">51 ms</td><td data-label="Sent" class="ek-num">2.9 GB</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="demo-note">Each td carries a data-label attribute; under 640px the label renders from td::before.</p>
+      </div>
+
+      <div class="demo-block">
+        <h3>Cards, grid, progress, ring</h3>
+        <div class="ek-grid">
+          <div class="ek-card">
+            <h4 class="ek-card-title">Chain sync</h4>
+            <p class="ek-card-sub">Block 4,821,905 of 4,822,610</p>
+            <div class="ek-progress" role="progressbar" aria-label="Chain sync" aria-valuenow="72" aria-valuemin="0" aria-valuemax="100"><div class="ek-progress-bar" style="width:72%"></div></div>
+          </div>
+          <div class="ek-card">
+            <h4 class="ek-card-title">Storage</h4>
+            <p class="ek-card-sub">38.1 GB of 64 GB used</p>
+            <div class="ek-progress ek-progress-warning" role="progressbar" aria-label="Storage" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"><div class="ek-progress-bar" style="width:60%"></div></div>
+          </div>
+          <div class="ek-card">
+            <h4 class="ek-card-title">Peer quota</h4>
+            <div class="demo-ring-row">
+              <svg class="ek-ring" viewBox="0 0 48 48" role="img" aria-label="72 percent of peer quota used">
+                <circle class="ek-ring-track" cx="24" cy="24" r="20"/>
+                <circle class="ek-ring-value" cx="24" cy="24" r="20" stroke-dasharray="125.66" stroke-dashoffset="35.2"/>
+              </svg>
+              <p class="ek-card-sub demo-ring-label">72% of 50 peer slots in use</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="demo-block">
+        <h3>Tabs</h3>
+        <div class="ek-tabs" role="tablist" aria-label="Node views">
+          <button class="ek-tab is-active" type="button" role="tab" aria-selected="true">Overview</button>
+          <button class="ek-tab" type="button" role="tab" aria-selected="false">Transactions</button>
+          <button class="ek-tab" type="button" role="tab" aria-selected="false">Peers</button>
+          <button class="ek-tab" type="button" role="tab" aria-selected="false">Settings</button>
+        </div>
+      </div>
+
+      <div class="demo-block">
+        <h3>Menu (dropdown panel, shown inline)</h3>
+        <div class="demo-menu-frame">
+          <div class="ek-menu" role="menu" aria-label="Address actions">
+            <button class="ek-menu-item is-active" type="button" role="menuitem">Copy address</button>
+            <button class="ek-menu-item" type="button" role="menuitem">View on explorer</button>
+            <button class="ek-menu-item" type="button" role="menuitem" disabled>Export key</button>
+            <div class="ek-menu-sep" role="separator"></div>
+            <button class="ek-menu-item" type="button" role="menuitem">Disconnect</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="demo-block">
+        <h3>Modal and bottom sheet (shown inline; apps toggle .is-open)</h3>
+        <div class="demo-static demo-pair">
+          <div class="ek-modal" role="dialog" aria-modal="true" aria-labelledby="dk-m1">
+            <div class="ek-modal-dialog">
+              <h4 class="ek-modal-title" id="dk-m1">Remove peer?</h4>
+              <p>node-ap-2.epix.zone will be dropped from your peer list. You can add it back later.</p>
+              <div class="ek-modal-actions">
+                <button class="ek-btn ek-btn-ghost" type="button">Cancel</button>
+                <button class="ek-btn ek-btn-danger" type="button">Remove peer</button>
+              </div>
+            </div>
+          </div>
+          <div class="ek-modal ek-sheet" role="dialog" aria-modal="true" aria-labelledby="dk-m2">
+            <div class="ek-modal-dialog">
+              <h4 class="ek-modal-title" id="dk-m2">Sign transaction</h4>
+              <p>Send 12.5 EPIX to epix1qxy&hellip;x0wlh for a 0.0021 EPIX fee.</p>
+              <div class="ek-modal-actions">
+                <button class="ek-btn ek-btn-ghost" type="button">Reject</button>
+                <button class="ek-btn ek-btn-primary" type="button">Sign</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <p class="demo-note">The second dialog has the .ek-sheet class: under 640px it docks to the bottom edge with stacked full-width actions.</p>
+      </div>
+
+      <div class="demo-block">
+        <h3>Toast stack (shown inline; normally fixed bottom-right)</h3>
+        <div class="demo-static">
+          <div class="ek-toast-stack">
+            <div class="ek-toast" role="status"><div><div class="ek-toast-title">Update available</div>EpixNet 0.9.4 is ready to install.</div></div>
+            <div class="ek-toast ek-toast-success" role="status"><div><div class="ek-toast-title">Transaction confirmed</div>Included in block 4,821,906.</div></div>
+            <div class="ek-toast ek-toast-warning" role="status"><div><div class="ek-toast-title">Fee market busy</div>Normal fee raised to 0.004 EPIX.</div></div>
+            <div class="ek-toast ek-toast-danger" role="alert"><div><div class="ek-toast-title">Broadcast failed</div>Node rejected the transaction. Check the sequence number.</div></div>
+            <div class="ek-toast ek-toast-info" role="status"><div><div class="ek-toast-title">New block</div>Height 4,821,907 sealed by val-epix-01.</div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="demo-block">
+        <h3>Badges and tags</h3>
+        <div class="ek-row">
+          <span class="ek-badge">Neutral</span>
+          <span class="ek-badge ek-badge-success">Success</span>
+          <span class="ek-badge ek-badge-warning">Warning</span>
+          <span class="ek-badge ek-badge-danger">Danger</span>
+          <span class="ek-badge ek-badge-info">Info</span>
+          <span class="ek-badge ek-badge-accent">Accent</span>
+        </div>
+        <div class="ek-row">
+          <span class="ek-tag">v0.9.4</span>
+          <span class="ek-tag ek-tag-success">Confirmed</span>
+          <span class="ek-tag ek-tag-warning">Pending</span>
+          <span class="ek-tag ek-tag-danger">Failed</span>
+          <span class="ek-tag ek-tag-info">Testnet</span>
+        </div>
+      </div>
+
+      <div class="demo-block">
+        <h3>Definition list</h3>
+        <div class="ek-card">
+          <dl class="ek-dl">
+            <dt>Tx hash</dt><dd class="ek-mono">9F2C41B0A64E7D13C58821F6B0AA43F09D7E55C2E8A1904B6C3F72D5D8E1</dd>
+            <dt>Block</dt><dd>4,821,906</dd>
+            <dt>Fee</dt><dd>0.0021 EPIX</dd>
+            <dt>Confirmations</dt><dd>18</dd>
+            <dt>Status</dt><dd><span class="ek-tag ek-tag-success">Confirmed</span></dd>
+          </dl>
+        </div>
+      </div>
+
+    </div>
+  </section>
+</body>
+</html>

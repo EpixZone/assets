@@ -3,3 +3,5 @@
 mascot/mp4/letsgo.mov
 mascot/mp4/tothemoon.mov
 mascot/mp4/welcome.mov
+node_modules/
+.DS_Store

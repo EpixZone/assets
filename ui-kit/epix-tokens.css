@@ -1,0 +1,163 @@
+/* ==========================================================================
+   Epix UI kit - design tokens
+   Light values live on :root and .theme-light. Dark values apply through
+   @media (prefers-color-scheme: dark) with a :root:not(.theme-light) guard,
+   and through an explicit .theme-dark class. Because custom properties
+   inherit and the class blocks set them directly on the classed element,
+   body.theme-dark and body.theme-light always beat the media query. This
+   matches EpixNet's body class mechanism.
+
+   Contrast notes (WCAG 2.x, checked by script):
+   - text / text-mid / text-low clear 4.5:1 on bg and surface in both themes.
+   - text-low is not for use on surface-2 at body sizes (4.33:1 in light);
+     use text-mid there.
+   - Semantic strong colors are NOT text colors on their soft fills
+     (1.7 to 3.7:1). Put --epix-ink-soft text on soft fills and
+     --epix-ink-strong text on strong fills.
+   ========================================================================== */
+
+:root,
+.theme-light {
+  color-scheme: light;
+
+  /* Brand */
+  --epix-cyan: #69E9F5;
+  --epix-teal: #31BDC6;
+  --epix-indigo: #5954CD;
+  --epix-purple: #8A4BDB;
+
+  /* Neutral ramp */
+  --epix-neutral-0: #FEFEFE;
+  --epix-neutral-1: #F6F6F9;
+  --epix-neutral-2: #F2F2F6;
+  --epix-neutral-3: #DCDCE3;
+  --epix-neutral-4: #ABABB5;
+  --epix-neutral-5: #72747B;
+  --epix-neutral-6: #404045;
+  --epix-neutral-7: #2E2E32;
+  --epix-neutral-8: #242428;
+  --epix-neutral-9: #1D1D1F;
+  --epix-neutral-10: #151517;
+  --epix-neutral-11: #09090A;
+  --epix-neutral-12: #020202;
+
+  /* Semantic: strong + soft pairs */
+  --epix-success: #2DCE89;
+  --epix-success-soft: #E8F8F0;
+  --epix-warning: #F0B622;
+  --epix-warning-soft: #FCF6E3;
+  --epix-danger: #F0224B;
+  --epix-danger-soft: #FDEDEC;
+  --epix-info: #31BDC6;
+  --epix-info-soft: #E7F8FA;
+
+  /* Ink: readable text on soft and strong semantic fills (both themes).
+     Soft fills stay light pastels in dark theme, so ink stays dark. */
+  --epix-ink-soft: #1D1D1F;   /* on any -soft fill, >= 14.8:1 */
+  --epix-ink-strong: #09090A; /* on success/warning/danger/info/cyan fills, >= 4.7:1 */
+
+  /* Theme aliases - light */
+  --epix-bg: var(--epix-neutral-0);
+  --epix-surface: var(--epix-neutral-0);
+  --epix-surface-2: var(--epix-neutral-1);
+  --epix-border: var(--epix-neutral-3);
+  --epix-border-strong: var(--epix-neutral-4);
+  --epix-text: var(--epix-neutral-9);      /* 16.7:1 on surface */
+  --epix-text-mid: var(--epix-neutral-6);  /* 10.2:1 on surface */
+  --epix-text-low: var(--epix-neutral-5);  /* 4.6:1 on surface */
+  --epix-accent: var(--epix-purple);       /* 5.1:1 vs white */
+  --epix-accent-2: var(--epix-cyan);       /* pair with --epix-ink-strong */
+  --epix-on-accent: #FEFEFE;               /* 5.1:1 on purple */
+  --epix-focus: var(--epix-purple);        /* ring color, 5.1:1 on light bg */
+
+  /* Type */
+  --epix-font-sans: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --epix-font-mono: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+
+  --epix-text-h1-size: 24px;      --epix-text-h1-weight: 700;      --epix-text-h1-lh: 1.25;
+  --epix-text-h2-size: 22px;      --epix-text-h2-weight: 700;      --epix-text-h2-lh: 1.3;
+  --epix-text-h3-size: 20px;      --epix-text-h3-weight: 600;      --epix-text-h3-lh: 1.3;
+  --epix-text-h4-size: 18px;      --epix-text-h4-weight: 600;      --epix-text-h4-lh: 1.35;
+  --epix-text-h5-size: 14px;      --epix-text-h5-weight: 600;      --epix-text-h5-lh: 1.4;
+  --epix-text-subtitle-size: 16px; --epix-text-subtitle-weight: 500; --epix-text-subtitle-lh: 1.45;
+  --epix-text-body1-size: 16px;   --epix-text-body1-weight: 400;   --epix-text-body1-lh: 1.5;
+  --epix-text-body2-size: 14px;   --epix-text-body2-weight: 400;   --epix-text-body2-lh: 1.5;
+  --epix-text-body3-size: 13px;   --epix-text-body3-weight: 400;   --epix-text-body3-lh: 1.45;
+  --epix-text-caption-size: 12px; --epix-text-caption-weight: 400; --epix-text-caption-lh: 1.4;
+  --epix-text-overline-size: 11px; --epix-text-overline-weight: 600; --epix-text-overline-lh: 1.4;
+  --epix-text-overline-spacing: 0.08em; /* uppercase */
+
+  /* Spacing - 4px grid */
+  --epix-space-1: 4px;
+  --epix-space-2: 8px;
+  --epix-space-3: 12px;
+  --epix-space-4: 16px;
+  --epix-space-5: 20px;
+  --epix-space-6: 24px;
+  --epix-space-7: 28px;
+  --epix-space-8: 32px;
+  --epix-space-9: 36px;
+  --epix-space-10: 40px;
+  --epix-space-11: 44px;
+  --epix-space-12: 48px;
+
+  /* Radii */
+  --epix-radius-sm: 4px;
+  --epix-radius-md: 8px;
+  --epix-radius-lg: 12px;
+
+  /* Borders */
+  --epix-border-width: 1px;
+  --epix-border-width-2: 2px;
+
+  /* Focus ring */
+  --epix-focus-ring-width: 2px;
+  --epix-focus-ring-offset: 2px;
+  --epix-focus-ring: var(--epix-focus-ring-width) solid var(--epix-focus);
+
+  /* Z-index steps */
+  --epix-z-base: 0;
+  --epix-z-sticky: 100;
+  --epix-z-dropdown: 200;
+  --epix-z-overlay: 300;
+  --epix-z-modal: 400;
+  --epix-z-toast: 500;
+
+  /* Shadows (flat, subtle; nothing stronger than 0 1px 3px .12).
+     Same values in both themes, so they are only declared here. */
+  --epix-shadow-sm: 0 1px 2px rgba(2, 2, 2, 0.08);
+  --epix-shadow: 0 1px 3px rgba(2, 2, 2, 0.12);
+}
+
+/* Dark theme values, shared by the media query and the class override. */
+@media (prefers-color-scheme: dark) {
+  :root:not(.theme-light) {
+    color-scheme: dark;
+    --epix-bg: var(--epix-neutral-10);
+    --epix-surface: var(--epix-neutral-9);
+    --epix-surface-2: var(--epix-neutral-8);
+    --epix-border: var(--epix-neutral-7);
+    --epix-border-strong: var(--epix-neutral-6);
+    --epix-text: var(--epix-neutral-1);     /* 15.6:1 on surface */
+    --epix-text-mid: var(--epix-neutral-3); /* 12.3:1 on surface */
+    --epix-text-low: var(--epix-neutral-4); /* 7.4:1 on surface */
+    --epix-focus: var(--epix-cyan);         /* ring color, 12.7:1 on dark bg */
+  }
+}
+
+/* Explicit class override. Kept last so an element carrying both
+   .theme-light and .theme-dark resolves dark, and so body.theme-dark
+   wins in a light system scheme (properties set on body shadow the
+   inherited :root values). */
+.theme-dark {
+  color-scheme: dark;
+  --epix-bg: var(--epix-neutral-10);
+  --epix-surface: var(--epix-neutral-9);
+  --epix-surface-2: var(--epix-neutral-8);
+  --epix-border: var(--epix-neutral-7);
+  --epix-border-strong: var(--epix-neutral-6);
+  --epix-text: var(--epix-neutral-1);
+  --epix-text-mid: var(--epix-neutral-3);
+  --epix-text-low: var(--epix-neutral-4);
+  --epix-focus: var(--epix-cyan);
+}
