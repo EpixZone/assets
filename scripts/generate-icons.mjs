@@ -1,22 +1,30 @@
 // Epix icon generation pipeline.
-// Run from the repo root: node scripts/generate-icons.mjs
+// Run: node scripts/generate-icons.mjs (paths resolve from this script, so
+// any working directory works).
 // Needs the sharp and png-to-ico packages on the module path, e.g.
 // `npm install --no-save sharp png-to-ico` before running.
+//
+// Optional environment overrides:
+//   EPIX_ICON_SCRATCH  scratch directory for the macOS iconset
+//                      (default: <os tmpdir>/epix-icons)
+//   EPIX_WALLET_FONT   Inter-SemiBold.ttf for the register lotties (default:
+//                      the epix-wallet checkout next to this repository)
 //
 // Renders images/icons/epix-icon.svg with sharp and composes platform icon
 // sets under images/icons/generated/. No gradients, flat colors only.
 
 import { promises as fs } from 'node:fs';
 import path from 'node:path';
+import os from 'node:os';
+import { fileURLToPath } from 'node:url';
 import { execFileSync } from 'node:child_process';
 import sharp from 'sharp';
 import pngToIco from 'png-to-ico';
 
-const ROOT = process.cwd();
+const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const SRC_SVG = path.join(ROOT, 'images', 'icons', 'epix-icon.svg');
 const OUT = path.join(ROOT, 'images', 'icons', 'generated');
-const SCRATCH = process.env.EPIX_ICON_SCRATCH
-  || '/private/tmp/claude-501/-Users-mud-github-assets/6960a7ae-fdc7-4ef9-82db-cf6d22181037/scratchpad';
+const SCRATCH = process.env.EPIX_ICON_SCRATCH || path.join(os.tmpdir(), 'epix-icons');
 
 const BLACK = '#020202';
 const TRANSPARENT = { r: 0, g: 0, b: 0, alpha: 0 };
@@ -602,7 +610,8 @@ for (const [name, W, H] of [
   // the wallet's own bundled font, so this section needs an epix-wallet
   // checkout next to this repo and skips itself otherwise.
   {
-    const FONT = '/Users/mud/github/epix-wallet/apps/extension/src/public/assets/font/Inter-SemiBold.ttf';
+    const FONT = process.env.EPIX_WALLET_FONT || path.join(ROOT, '..', 'epix-wallet',
+      'apps', 'extension', 'src', 'public', 'assets', 'font', 'Inter-SemiBold.ttf');
     const fontExists = await fs.access(FONT).then(() => true, () => false);
     if (!fontExists) {
       console.warn('skipping register lotties: wallet Inter font not found at', FONT);
